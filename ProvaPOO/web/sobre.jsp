@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Prova POO</title>
+        <%@include file="WEB-INF/jspf/menu.jspf" %>
     </head>
     <body>
         <h1>Avaliação POO</h1>
