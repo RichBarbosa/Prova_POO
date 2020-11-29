@@ -5,6 +5,7 @@
  */
 package web;
 
+import aula.Disciplina;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.sql.*;
@@ -27,6 +28,32 @@ public class DbListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        Connection con = null;
+        Statement stmt = null;
+        
+        try{
+          Class.forName(CLASS_NAME);
+          con = DriverManager.getConnection(URL);
+          Message = "funcionou";
+          stmt = con.createStatement();
+                    Message += " funcionou 2";
+
+          stmt.execute(Disciplina.getCreateStatement());
+                    Message += " funcionou 3";
+                    
+              if(Disciplina.getList().isEmpty()){
+                            Message += " funcionou 4";
+
+              }      
+            
+            
+        }catch(Exception ex){
+            exceptionMessage = ex.getLocalizedMessage();
+            
+        }finally{
+            try{stmt.close();}catch(Exception ex2){}
+            try{con.close();}catch(Exception ex2){}
+        }
     }
 
     @Override

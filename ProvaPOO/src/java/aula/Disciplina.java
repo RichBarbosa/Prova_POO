@@ -6,6 +6,8 @@
 package aula;
 
 import java.util.ArrayList;
+import java.sql.*;
+import web.DbListener;
 
 /**
  *
@@ -55,6 +57,27 @@ public class Disciplina {
     public void setNota(float nota) {
         this.nota = nota;
     }
+    
+    public static ArrayList<Disciplina> getList() throws Exception{
+        ArrayList<Disciplina> list = new ArrayList();
+        Connection con = DbListener.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT *FROM disciplinas");
+        while(rs.next()){
+            list.add(new Disciplina(
+                    rs.getString("nome"),
+                    rs.getString("ementa"),
+                    rs.getInt("ciclo"),
+                    rs.getFloat("nota")
+            ));
+        }
+        rs.close();
+        stmt.close();
+        con.close();
+        
+        return list;
+    }
+    
     /*public static ArrayList<Disciplina> getList(){
         ArrayList<Disciplina> disciplina = new ArrayList();
         disciplina.add(new Disciplina("programação orientada a objetos", "Conceitos e evolução da tecnologia de orientação a objetos. Limitações e diferenças entre o paradigma da programação estruturada em relação à orientação a objetos. Conceito de objeto, classe, métodos, atributos, herança, polimorfismo, agregação, associação, dependência, encapsulamento, mensagem e suas respectivas notações na linguagem padrão de representação da orientação a objetos. Implementação de algoritmos orientado a objetos utilizando linguagens de programação. Aplicação e uso das estruturas fundamentais da orientação a objetos.", 4));
