@@ -17,10 +17,11 @@ public class Disciplina {
     private int ciclo;   
     private float nota;
 
-    public Disciplina(String nome, String ementa, int ciclo) {
+    public Disciplina(String nome, String ementa, int ciclo, float nota) {
         this.nome = nome;
         this.ementa = ementa;
         this.ciclo = ciclo;
+        this.nota = nota;
     }
 
     public String getNome() {
@@ -54,7 +55,7 @@ public class Disciplina {
     public void setNota(float nota) {
         this.nota = nota;
     }
-    public static ArrayList<Disciplina> getList(){
+    /*public static ArrayList<Disciplina> getList(){
         ArrayList<Disciplina> disciplina = new ArrayList();
         disciplina.add(new Disciplina("programação orientada a objetos", "Conceitos e evolução da tecnologia de orientação a objetos. Limitações e diferenças entre o paradigma da programação estruturada em relação à orientação a objetos. Conceito de objeto, classe, métodos, atributos, herança, polimorfismo, agregação, associação, dependência, encapsulamento, mensagem e suas respectivas notações na linguagem padrão de representação da orientação a objetos. Implementação de algoritmos orientado a objetos utilizando linguagens de programação. Aplicação e uso das estruturas fundamentais da orientação a objetos.", 4));
         disciplina.add(new Disciplina("Banco de dados", "Conceitos de Base de Dados. Modelos conceituais de informações. Modelos de Dados: Relacional,  Redes e Hierárquicos. Modelagem de dados - conceitual, lógica e física. Teoria relacional: dependências funcionais e multivaloradas, formas normais. Restrições de integridade e de segurança em Banco de Dados Relacional. Sistemas Gerenciadores de Banco de Dados – objetivo e funções. Linguagens de declaração e de manipulação de dados.", 4));
@@ -66,5 +67,14 @@ public class Disciplina {
 
         
         return disciplina;
+    }*/
+    public static String getCreateStatement(){
+        return "CREATE TABLE IF NOT EXISTS disciplinas("
+                + "nome VARCHAR(50) NOT NULL,"
+                + "ementa VARCHAR(500) NOT NULL,"
+                + "ciclo INTEGER NOT NULL,"
+                + "nota FLOAT"
+                + ")";
     }
+    
 }
