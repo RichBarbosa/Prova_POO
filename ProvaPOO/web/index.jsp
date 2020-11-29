@@ -17,22 +17,8 @@
         <h1>Avaliação POO</h1>
         <h1>Richard Barbosa dos Santos Silva</h1>
         <h1>RA:	1290481912031</h1>
+        <div>Disciplinas matriculadas</div>
+        <div><%= Disciplina.getList().size() %></div>
     </body>
-    <table border="1" >
-        <tr>
-            <th>Indice</th>
-            <th>Disciplina</th>
-            <th>Ementa</th>
-            <th>Ciclo</th>
-        </tr>
-        <%for(int i = 0; i < Disciplina.getList().size(); i++){%>
-        <tr>
-            <td><%=i%></td>
-            <%Disciplina d = Disciplina.getList().get(i); %>
-            <td><%=d.getNome() %></td>
-            <td><%=d.getEmenta() %></td>
-            <td><%=d.getCiclo() %></td>
-        </tr>
-        <%}%>
-    </table>
+   
 </html>
