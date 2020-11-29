@@ -38,7 +38,7 @@ public class DbListener implements ServletContextListener {
           stmt = con.createStatement();
                     Message += " funcionou 2";
 
-          stmt.execute(Disciplina.getCreateStatement());
+          stmt.execute(Disciplina.GetCreateStatement());
                     Message += " funcionou 3";
                     
               if(Disciplina.getList().isEmpty()){

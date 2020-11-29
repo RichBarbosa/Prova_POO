@@ -58,11 +58,44 @@ public class Disciplina {
         this.nota = nota;
     }
     
+     public static void InserirDisciplina(String nome, String ementa, int ciclo, float nota) throws Exception{
+        Connection con = DbListener.getConnection();
+        PreparedStatement stmt = con.prepareStatement
+        ("INSERT INTO discs VALUES(?,?,?,?)");
+        stmt.setString(1, nome);
+        stmt.setString(2, ementa);
+        stmt.setInt(3, ciclo);
+        stmt.setFloat(4, nota);
+        stmt.execute();
+        stmt.close();
+        con.close();
+    }
+      
+     public static void ExcluirDisciplina(String nome) throws Exception{
+        Connection con = DbListener.getConnection();
+        PreparedStatement stmt = con.prepareStatement
+        ("DELETE FROM discs WHERE nome = ?");
+        stmt.setString(1, nome);
+        stmt.execute();
+        stmt.close();
+        con.close();
+    }
+      public static void AlterarNota(String nome, float nota) throws Exception{
+        Connection con = DbListener.getConnection();
+        PreparedStatement stmt = con.prepareStatement
+        ("UPDATE discs SET nota= ? WHERE nome = ?");
+        stmt.setFloat(1, nota);
+        stmt.setString(2, nome);
+        stmt.execute();
+        stmt.close();
+        con.close();
+    }
+            
     public static ArrayList<Disciplina> getList() throws Exception{
         ArrayList<Disciplina> list = new ArrayList();
         Connection con = DbListener.getConnection();
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT *FROM disciplinas");
+        ResultSet rs = stmt.executeQuery("SELECT *FROM discs");
         while(rs.next()){
             list.add(new Disciplina(
                     rs.getString("nome"),
@@ -91,13 +124,13 @@ public class Disciplina {
         
         return disciplina;
     }*/
-    public static String getCreateStatement(){
-        return "CREATE TABLE IF NOT EXISTS disciplinas("
+    
+    public static String GetCreateStatement(){
+        return "CREATE TABLE IF NOT EXISTS discs("
                 + "nome VARCHAR(50) NOT NULL,"
                 + "ementa VARCHAR(500) NOT NULL,"
                 + "ciclo INTEGER NOT NULL,"
                 + "nota FLOAT"
                 + ")";
     }
-    
 }
